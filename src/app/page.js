@@ -19,6 +19,14 @@ export default function Home() {
     console.log(listTasks)
   }
 
+  function HandleCheck(id) {
+    setListTasks((prevTasks) => {
+      return prevTasks.map((task) =>
+        task.id === id ? { ...task, checked: !task.checked } : task
+      );
+    });
+  }
+
   return (
     <main className="flex min-h-screen flex-col">
       <div className='h-[200px] w-full bg-zinc-100 flex items-center justify-center'>
@@ -33,7 +41,7 @@ export default function Home() {
           <TabsTrigger value="conversor">Conversor de números</TabsTrigger>
         </TabsList>
         <TabsContent
-          className="px-64"
+          className="px-64 max-lg:px-20 max-md:px-5"
           value="todolist">
           <h1 className='font-bold text-2xl my-5'>Pagina de lista de tarefas</h1>
           <div className='flex gap-3'>
@@ -54,9 +62,10 @@ export default function Home() {
                 key={item.id}
               >
                 <Checkbox
-                  onCheckedChange={(e) => setIsChecked(e)}
+                  checked={item.checked}
+                  onCheckedChange={() => HandleCheck(item.id)}
                 />
-                <span className={`${item.checked ? "text-red-500" : "line-through"}`}>{item.name}</span>
+                <span className={`${item.checked ? "line-through text-zinc-500" : "text-zinc-900" }`}>{item.name}</span>
               </li>
             ))}
           </ul>
