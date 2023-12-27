@@ -18,16 +18,33 @@ import { FilterIcon } from 'lucide-react'
 export default function Home() {
 
   const [valueInput, setValueInput] = useState('')
-  const [listTasks, setListTasks] = useState([])
+    const [listTasks, setListTasks] = useState(() => {
+    const storedList = localStorage.getItem('taskList');
+    return storedList ? JSON.parse(storedList) : [];
+  });
   const [IsChecked, setIsChecked] = useState(false)
   const [sortType, setSortType] = useState(null);
+
+
+  useEffect(() => {
+    const storedList = localStorage.getItem('taskList');
+    if (storedList) {
+      setListTasks(JSON.parse(storedList));
+    }
+  }, []);
+
+  // Salva os itens no localStorage sempre que a lista é atualizada
+  useEffect(() => {
+    localStorage.setItem('taskList', JSON.stringify(listTasks));
+  }, [listTasks]);
+
 
   function HandleNewTask() {
     if (valueInput === '') {
       alert('digite algo para continuar')
     } else {
-      setListTasks([{ id: v4(), name: valueInput, checked: IsChecked }, ...listTasks])
-      setValueInput((prev) => '')
+      setListTasks((prevList) => [{ id: v4(), name: valueInput, checked: IsChecked }, ...prevList]);
+      setValueInput(''); // Modifique aqui para setar diretamente uma string vazia
     }
 
   }
@@ -107,7 +124,7 @@ export default function Home() {
             />
             <Popover className="absolute right-0 top-0">
               <PopoverTrigger asChild>
-                <Button variant="outline"><FilterIcon className='w-4 h-4'/> </Button>
+                <Button variant="outline"><FilterIcon className='w-4 h-4' /> </Button>
               </PopoverTrigger>
               <PopoverContent className="w-80">
                 <div className="grid gap-4">
@@ -121,7 +138,7 @@ export default function Home() {
                   <div className="grid gap-3">
                     <div className="flex items-center justify-start gap-2">
                       {/* Substitua o input type checkbox pelo componente Checkbox do ShadCn */}
-                      <Checkbox id="all" onChange={() => filterByStatus('all')} />
+                      <Checkbox id="filter-all" onChange={() => filterByStatus('all')} />
                       <Label htmlFor="all">Todas as Tarefas</Label>
                     </div>
                     <div className="flex items-center justify-start gap-2">
