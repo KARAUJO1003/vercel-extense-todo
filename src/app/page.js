@@ -9,6 +9,7 @@ import { useState } from 'react'
 import { v4 } from 'uuid'
 import Image from 'next/image'
 import * as bg from '@/app/assets/bg-violet.jpg'
+import { ScrollArea } from '@/components/ui/scroll-area'
 
 export default function Home() {
 
@@ -21,13 +22,14 @@ export default function Home() {
       alert('digite algo para continuar')
     } else {
       setListTasks([{ id: v4(), name: valueInput, checked: IsChecked }, ...listTasks])
-      setValueInput('')
+      setValueInput((prev) => '')
     }
 
   }
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
+      e.preventDefault()
       HandleNewTask();
     }
   }
@@ -39,6 +41,7 @@ export default function Home() {
       );
     });
   }
+
   return (
     <main className="flex min-h-screen flex-col">
       <div className='h-[200px] w-full overflow-hidden bg-zinc-100 flex items-center justify-center'>
@@ -63,6 +66,7 @@ export default function Home() {
           <h1 className='font-bold text-2xl my-5'>Pagina de lista de tarefas</h1>
           <div className='flex gap-3'>
             <Input
+              value={valueInput}
               onChange={(e) => setValueInput(e.target.value)}
               placeholder="Digite uma nova tarefa..."
               onKeyDown={handleKeyDown}
@@ -73,19 +77,21 @@ export default function Home() {
               Adicionar
             </Button>
           </div>
-          <ul className='mt-7'>
-            {listTasks.map((item) => (
-              <li
-                className='flex items-center gap-3'
-                key={item.id}
-              >
-                <Checkbox
-                  checked={item.checked}
-                  onCheckedChange={() => HandleCheck(item.id)}
-                />
-                <span className={`${item.checked ? "line-through text-zinc-500" : "text-zinc-900"}`}>{item.name}</span>
-              </li>
-            ))}
+          <ul className='mt-7 h-80'>
+            <ScrollArea className="h-80">
+              {listTasks.map((item) => (
+                <li
+                  className='flex items-center gap-3'
+                  key={item.id}
+                >
+                  <Checkbox
+                    checked={item.checked}
+                    onCheckedChange={() => HandleCheck(item.id)}
+                  />
+                  <span className={`${item.checked ? "line-through text-zinc-500" : "text-zinc-900"}`}>{item.name}</span>
+                </li>
+              ))}
+            </ScrollArea>
           </ul>
 
         </TabsContent>
