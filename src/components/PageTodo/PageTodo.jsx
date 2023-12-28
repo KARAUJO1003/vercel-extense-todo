@@ -19,20 +19,27 @@ export function PageTodo() {
   const [IsChecked, setIsChecked] = useState(false);
   const [sortType, setSortType] = useState(null);
   const [listTasks, setListTasks] = useState(() => {
-    const storedList = localStorage.getItem("taskList");
-    return storedList ? JSON.parse(storedList) : [];
+    if (typeof window !== 'undefined') {
+      const storedList = window.localStorage.getItem("taskList");
+      return storedList ? JSON.parse(storedList) : [];
+    }
+    return [];
   });
 
   useEffect(() => {
-    const storedList = localStorage.getItem("taskList");
-    if (storedList) {
-      setListTasks(JSON.parse(storedList));
+    if (typeof window !== 'undefined') {
+      const storedList = window.localStorage.getItem("taskList");
+      if (storedList) {
+        setListTasks(JSON.parse(storedList));
+      }
     }
   }, []);
 
   // Salva os itens no localStorage sempre que a lista é atualizada
   useEffect(() => {
-    localStorage.setItem("taskList", JSON.stringify(listTasks));
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem("taskList", JSON.stringify(listTasks));
+    }
   }, [listTasks]);
 
   function HandleNewTask() {
