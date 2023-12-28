@@ -41,7 +41,7 @@ export function PageConversor() {
 
           <Button onClick={AddValue}>Adicionar</Button>
         </CardContent>
-        <CardFooter className="min-h-20 border p-3 text-sm font-semibold bg-zinc-100">
+        <CardFooter className="min-h-40 border p-3 text-sm font-semibold bg-zinc-100">
           <p className="uppercase">{result}</p>
         </CardFooter>
       </Card>
