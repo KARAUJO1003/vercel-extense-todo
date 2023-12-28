@@ -77,6 +77,11 @@ export function PageTodo() {
     );
     setListTasks(filteredList);
   };
+
+
+  function handleDelete (id){
+    setListTasks((prevTasks) => prevTasks.filter((task) => task.id !== id))
+  }
   //---------------------------------------------------------------------------CODIGO JSX --------------------------------------------------------------------------------------------
   return (
     <div>
@@ -176,7 +181,11 @@ export function PageTodo() {
               >
                 {item.name}
               </span>
-              <Button variant="ghost" className="m-0 p-0 h-auto w-auto">
+              <Button 
+              variant="ghost" 
+              className="m-0 p-0 h-auto w-auto"
+              onClick={() => handleDelete(item.id)}
+              >
                 <X className="w-5 h-5 text-red-500 rounded hover:bg-zinc-200 hover:text-red-700 mr-2" />
               </Button>
             </li>
