@@ -85,7 +85,7 @@ export function PageTodo() {
   //---------------------------------------------------------------------------CODIGO JSX --------------------------------------------------------------------------------------------
   return (
     <div>
-      <div className="flex gap-3">
+      <div className="flex gap-3 px-10">
         <Input
           className="relative"
           value={valueInput}
@@ -140,7 +140,7 @@ export function PageTodo() {
                   <Label htmlFor="unchecked">Não Concluídas</Label>
                 </div>
 
-                <Separator />
+                
 
                 <div className="flex items-center space-x-2">
                   <button id="dt" onClick={() => toggleSort("date")}>
@@ -162,12 +162,12 @@ export function PageTodo() {
 
         <Button onClick={HandleNewTask}>Adicionar</Button>
       </div>
-      <ul className="mt-7 h-80 gap-2">
+      <ul className="mt-7 h-80 gap-2 border bg-zinc-100 px-10 py-5">
         <ScrollArea className="h-80 ">
           {listTasks.map((item) => (
             <li
               key={item.id}
-              className="flex items-start gap-3 break-all bg-zinc-100 py-1 px-2 mb-1"
+              className="flex items-start gap-3 break-all bg-zinc-200 py-1 px-2 mb-1"
             >
               <Checkbox
                 checked={item.checked}
@@ -182,11 +182,11 @@ export function PageTodo() {
                 {item.name}
               </span>
               <Button 
-              variant="ghost" 
+              variant="link" 
               className="m-0 p-0 h-auto w-auto"
               onClick={() => handleDelete(item.id)}
               >
-                <X className="w-5 h-5 text-red-500 rounded hover:bg-zinc-200 hover:text-red-700 mr-2" />
+                <X className="w-5 h-5 text-red-500 rounded hover:text-red-700 " />
               </Button>
             </li>
           ))}

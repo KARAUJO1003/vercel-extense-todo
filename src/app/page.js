@@ -43,13 +43,13 @@ export default function Home() {
               <CardTitle>Lista de tarefas</CardTitle>
               <CardDescription>Adicione suas tarefas</CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-0">
               <PageTodo />
             </CardContent>
           </Card>
         </TabsContent>
 
-        <TabsContent className="px-10" value="conversor">
+        <TabsContent value="conversor">
           <PageConversor />
         </TabsContent>
       </Tabs>
