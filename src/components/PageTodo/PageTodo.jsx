@@ -175,7 +175,7 @@ export function PageTodo() {
                 onCheckedChange={() => HandleCheck(item.id)}
               />
               <span
-                className={`pb-1 w-full ${
+                className={`pb-1 capitalize w-full ${
                   item.checked ? "line-through text-zinc-500" : "text-zinc-900"
                 } `}
               >
