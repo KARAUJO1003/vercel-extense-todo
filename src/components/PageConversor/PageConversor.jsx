@@ -34,7 +34,7 @@ export function PageConversor() {
 
   return (
     <div className="w-full flex justify-center">
-      <Card className="max-w-[500px] gap-3">
+      <Card className="max-w-[500px] gap-3 max-md:max-w-[300px]">
         <CardHeader>
           <CardTitle>Extenso</CardTitle>
           <CardDescription>Converta números para extenso</CardDescription>
