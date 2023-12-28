@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -20,24 +20,7 @@ export function PageTodo() {
   const [valueInput, setValueInput] = useState("");
   const [IsChecked, setIsChecked] = useState(false);
   const [sortType, setSortType] = useState(null);
-  const [listTasks, setListTasks] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const storedList = localStorage.getItem("taskList");
-      return storedList ? JSON.parse(storedList) : [];
-    return [];}
-  });
-
-  if (typeof window !== 'undefined') {
-    const storedList = localStorage.getItem("taskList");
-    if (storedList) {
-      setListTasks(JSON.parse(storedList));
-    }}
-
-
-  // Salva os itens no localStorage sempre que a lista é atualizada
-  if (typeof window !== 'undefined') {
-    localStorage.setItem("taskList", JSON.stringify(listTasks));
-  }
+  const [listTasks, setListTasks] = useState([]);
 
   function HandleNewTask() {
     if (valueInput === "") {
